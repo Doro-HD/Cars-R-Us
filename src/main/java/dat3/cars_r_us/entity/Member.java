@@ -15,8 +15,6 @@ public class Member extends UserWithRoles {
 
     private String firstName;
     private String lastName;
-    private String street;
-    private String zip;
 
     public Member(String username, String email, String password, String firstName, String lastName) {
         super(username, email, password);
