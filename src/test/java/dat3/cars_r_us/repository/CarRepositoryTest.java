@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +41,23 @@ class CarRepositoryTest {
         Optional<Car> car2 = this.carRepository.findById(carId2);
         Optional<Car> car3 = this.carRepository.findById(carId3);
 
+        assertTrue(car1.isPresent());
+        assertTrue(car2.isPresent());
+        assertTrue(car3.isPresent());
+    }
 
+    @Test
+    public void findAll() {
+        Iterable<Car> cars = this.carRepository.findAll();
+        Iterator<Car> carIterator = cars.iterator();
+
+        int length = 0;
+        while (carIterator.hasNext()) {
+            length += 1;
+            carIterator.next();
+        }
+
+        assertEquals(length, 3);
     }
 
 }
