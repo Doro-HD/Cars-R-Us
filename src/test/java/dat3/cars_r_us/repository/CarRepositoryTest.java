@@ -41,9 +41,9 @@ class CarRepositoryTest {
         Optional<Car> car2 = this.carRepository.findById(carId2);
         Optional<Car> car3 = this.carRepository.findById(carId3);
 
-        assertTrue(car1.isPresent());
-        assertTrue(car2.isPresent());
-        assertTrue(car3.isPresent());
+        assertEquals(car1.orElseThrow().getId(), carId1);
+        assertEquals(car2.orElseThrow().getId(), carId2);
+        assertEquals(car3.orElseThrow().getId(), carId3);
     }
 
     @Test
