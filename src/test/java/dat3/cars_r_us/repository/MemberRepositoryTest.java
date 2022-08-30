@@ -20,9 +20,42 @@ class MemberRepositoryTest {
     private static String member3Id;
     @BeforeAll
     public static void setupData(@Autowired MemberRepository memberRepository) {
-        Member member1 = new Member("user1", "lasse@example.com", "password1", "test1", "testsen1");
-        Member member2 = new Member("user2", "troels@example.com", "password2", "test2", "testsen2");
-        Member member3 = new Member("user3", "victor@example.com", "password3", "test3", "testsen3");
+        Member member1 = new Member(
+                "user1",
+                "lasse@example.com",
+                "password1",
+                "test1",
+                "testsen1",
+                "testCity",
+                "TestStreet",
+                "testZip",
+                true,
+                0
+        );
+        Member member2 = new Member(
+                "user2",
+                "troels@example.com",
+                "password2",
+                "test2",
+                "testsen2",
+                "testCity",
+                "TestStreet",
+                "testZip",
+                true,
+                0
+        );
+        Member member3 = new Member(
+                "user3",
+                "victor@example.com",
+                "password3",
+                "test3",
+                "testsen3",
+                "testCity",
+                "TestStreet",
+                "testZip",
+                true,
+                0
+        );
 
         memberRepository.save(member1);
         memberRepository.save(member2);

@@ -24,7 +24,18 @@ public class SetupDevUsers implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        Member member1 = new Member("user133", passwordUsedByAll, "test", "Kurt", "Kurtsen");
+        Member member1 = new Member(
+                "user133",
+                passwordUsedByAll,
+                "test",
+                "Kurt",
+                "Kurtsen",
+                "testCity",
+                "TestStreet",
+                "testZip",
+                true,
+                0
+        );
         memberRepository.save(member1);
         setupUserWithRoleUsers();
     }
