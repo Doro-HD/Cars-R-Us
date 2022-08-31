@@ -40,8 +40,8 @@ public class MemberController {
 
     //Security admin/user ??
     @PutMapping("/{username}")
-    private ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username){
-        return null;
+    private MemberResponse editMember(@RequestBody MemberRequest body, @PathVariable String username){
+        return this.memberService.editMember(body, username);
     }
 
     //Security admin

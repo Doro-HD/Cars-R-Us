@@ -6,10 +6,10 @@ import dat3.cars_r_us.entity.Member;
 import dat3.cars_r_us.repository.MemberRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,9 +32,39 @@ public class MemberService {
         //Later you should add error checks --> Missing arguments, email taken etc.
 
         Member newMember = MemberRequest.getMemberEntity(memberRequest);
+
+        if (memberRepository.existsById(newMember.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member with this username already exists");
+        } else if (memberRepository.existsByEmail(newMember.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member with this email already exists");
+        }
+
         newMember = memberRepository.save(newMember);
 
         return new MemberResponse(newMember, false);
+    }
+
+    public MemberResponse editMember(MemberRequest memberRequest, String username) {
+        Optional<Member> memberOptional = this.memberRepository.findById(username);
+        Member member = memberOptional.orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")
+        );
+
+        if (username.equals(memberRequest.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot change username");
+        }
+
+        member.setPassword(memberRequest.getPassword());
+        member.setEmail(memberRequest.getEmail());
+        member.setFirstName(memberRequest.getFirstName());
+        member.setLastName(memberRequest.getLastName());
+        member.setStreet(memberRequest.getStreet());
+        member.setCity(memberRequest.getCity());
+        member.setZip(memberRequest.getZip());
+
+        this.memberRepository.save(member);
+
+        return new MemberResponse(member);
     }
 
     public MemberResponse findMemberByUsername(String username) throws Exception {
