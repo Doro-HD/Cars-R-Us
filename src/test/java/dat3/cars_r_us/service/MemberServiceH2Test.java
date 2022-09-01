@@ -57,8 +57,4 @@ class MemberServiceH2Test {
 
         assertEquals(3,memberRepository.count());
     }
-
-
-
-
 }
