@@ -17,28 +17,28 @@ import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class MemberServiceH2Test {
 
     private MemberService memberService;
 
-    private static MemberRepository memberRepository;
+    private static MemberRepository memberRepositoryStatic;
 
     @BeforeAll
-    public static void setupData(@Autowired MemberRepository member_Repository){
-        memberRepository = member_Repository;
+    public static void setupData(@Autowired MemberRepository memberRepository){
+        memberRepositoryStatic = memberRepository;
+        memberRepositoryStatic.deleteAll();
         List<Member> members = List.of(
                 new Member("m1", "pw", "m1@a.dk", "aa", "aaa", "aaaa", "aaaa", "1234"),
                 new Member("m2", "pw", "mm@a.dk", "bb", "bbb", "bbbb", "bbbb", "1234")
         );
-        memberRepository.saveAll(members);
+        memberRepositoryStatic.saveAll(members);
     }
 
     @BeforeEach
     public void setMemberService(){
-        memberService = new MemberService(memberRepository);
+        memberService = new MemberService(memberRepositoryStatic);
     }
 
     @Test
@@ -55,6 +55,6 @@ class MemberServiceH2Test {
         MemberRequest request = new MemberRequest(m);
         memberService.addMember(request);
 
-        assertEquals(3,memberRepository.count());
+        assertEquals(3, memberRepositoryStatic.count());
     }
 }

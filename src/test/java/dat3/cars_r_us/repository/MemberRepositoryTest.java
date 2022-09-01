@@ -20,6 +20,7 @@ class MemberRepositoryTest {
     private static String member3Id;
     @BeforeAll
     public static void setupData(@Autowired MemberRepository memberRepository) {
+        memberRepository.deleteAll();
         Member member1 = new Member(
                 "user1",
                 "lasse@example.com",
@@ -79,5 +80,4 @@ class MemberRepositoryTest {
         assertFalse(member2.isPresent());
         assertTrue(member3.isPresent());
     }
-
 }
