@@ -32,7 +32,7 @@ public class CarController {
 
     @GetMapping("/{id}")
     public CarResponse findById(@PathVariable("id") int carId) {
-        return this.carService.findById(carId)
+        return this.carService.findById(carId);
     }
 
     @PutMapping
