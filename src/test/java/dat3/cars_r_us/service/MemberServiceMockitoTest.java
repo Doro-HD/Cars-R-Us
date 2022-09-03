@@ -43,10 +43,6 @@ class MemberServiceMockitoTest {
     }
 
     @Test
-    void findMembers() {
-    }
-
-    @Test
     void addMember() {
         Member member = new Member("m1", "pw", "m1@a.dk", "aa", "aaa", "aaaa", "aaaa", "1234");
         //If you want to do this for Car you have to manually set the id. REMEMBER there is NO real database
@@ -56,13 +52,5 @@ class MemberServiceMockitoTest {
         MemberResponse found = memberService.addMember(request);
 
         assertEquals("m1", found.getUsername());
-    }
-
-    @Test
-    void editMember() {
-    }
-
-    @Test
-    void findMemberByUsername() {
     }
 }
