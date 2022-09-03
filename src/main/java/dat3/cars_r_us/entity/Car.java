@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Entity
 public class Car {
 
-    @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

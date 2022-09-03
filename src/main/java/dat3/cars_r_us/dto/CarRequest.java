@@ -25,6 +25,7 @@ public class CarRequest {
     public Car getCarEntity() {
         Car car = new Car();
 
+        car.setId(this.id);
         car.setBrand(this.brand);
         car.setModel(this.model);
         car.setPricePerDay(this.pricePerDay);
