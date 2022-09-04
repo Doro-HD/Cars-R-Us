@@ -26,12 +26,7 @@ class CarServiceTest {
     @BeforeAll
     static void setup(@Autowired CarRepository carRepository) {
         carRepositoryStatic = carRepository;
-
-    }
-
-    @BeforeEach
-    void setCarService() {
-        this.carService = new CarService(carRepositoryStatic);
+        carRepositoryStatic.deleteAll();
 
         List<Car> cars = List.of(
                 new Car("Toyota", "Corolla"),
@@ -43,9 +38,9 @@ class CarServiceTest {
         carRepositoryStatic.saveAll(cars);
     }
 
-    @AfterEach
-    void tearDown() {
-        carRepositoryStatic.deleteAll();
+    @BeforeEach
+    void setCarService() {
+        this.carService = new CarService(carRepositoryStatic);
     }
 
     @Test
