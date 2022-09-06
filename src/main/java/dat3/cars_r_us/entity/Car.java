@@ -6,8 +6,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @Entity
@@ -28,41 +32,15 @@ public class Car {
     private LocalDate dateCreated;
     @UpdateTimestamp
     private LocalDate lastDateEdited;
+    @OneToMany(mappedBy = "car", cascade = CascadeType.PERSIST)
+    private List<Reservation> reservations = new ArrayList<>();
 
     public Car(String brand, String model) {
         this.brand = brand;
         this.model = model;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public double getPricePerDay() {
-        return pricePerDay;
-    }
-
-    public void setPricePerDay(double pricePerDay) {
-        this.pricePerDay = pricePerDay;
-    }
-
-    public double getBestDiscount() {
-        return bestDiscount;
-    }
-
-    public void setBestDiscount(double bestDiscount) {
-        this.bestDiscount = bestDiscount;
+    public void addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
     }
 }
