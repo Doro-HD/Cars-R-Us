@@ -2,10 +2,12 @@ package dat3.cars_r_us.dto;
 
 import dat3.cars_r_us.entity.Car;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class CarRequest {
 
     private int id;
