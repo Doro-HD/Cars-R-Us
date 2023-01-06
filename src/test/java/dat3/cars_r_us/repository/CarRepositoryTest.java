@@ -23,6 +23,8 @@ class CarRepositoryTest {
     @BeforeAll
     public static void setupData(@Autowired CarRepository carRepository) {
         CarRepositoryTest.carRepository = carRepository;
+        CarRepositoryTest.carRepository.deleteAll();
+
         Car car1 = new Car("Toyota", "Corolla");
         Car car2 = new Car("Suzuki", "Test");
         Car car3 = new Car("Honda", "Test");
@@ -38,9 +40,9 @@ class CarRepositoryTest {
 
     @Test
     public void findById() {
-        Optional<Car> car1 = this.carRepository.findById(carId1);
-        Optional<Car> car2 = this.carRepository.findById(carId2);
-        Optional<Car> car3 = this.carRepository.findById(carId3);
+        Optional<Car> car1 = carRepository.findById(carId1);
+        Optional<Car> car2 = carRepository.findById(carId2);
+        Optional<Car> car3 = carRepository.findById(carId3);
 
         assertEquals(car1.orElseThrow().getId(), carId1);
         assertEquals(car2.orElseThrow().getId(), carId2);
@@ -49,7 +51,7 @@ class CarRepositoryTest {
 
     @Test
     public void findAll() {
-        Iterable<Car> cars = this.carRepository.findAll();
+        Iterable<Car> cars = carRepository.findAll();
         Iterator<Car> carIterator = cars.iterator();
 
         int length = 0;
