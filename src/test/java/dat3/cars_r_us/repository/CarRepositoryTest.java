@@ -15,20 +15,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class CarRepositoryTest {
 
     @Autowired
-    private CarRepository carRepository;
+    private static CarRepository carRepository;
     private static int carId1;
     private static int carId2;
     private static int carId3;
 
     @BeforeAll
     public static void setupData(@Autowired CarRepository carRepository) {
+        CarRepositoryTest.carRepository = carRepository;
         Car car1 = new Car("Toyota", "Corolla");
         Car car2 = new Car("Suzuki", "Test");
         Car car3 = new Car("Honda", "Test");
 
-        carRepository.save(car1);
-        carRepository.save(car2);
-        carRepository.save(car3);
+        CarRepositoryTest.carRepository.save(car1);
+        CarRepositoryTest.carRepository.save(car2);
+        CarRepositoryTest.carRepository.save(car3);
 
         carId1 = car1.getId();
         carId2 = car2.getId();
