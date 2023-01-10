@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @AllArgsConstructor
+@Table(name = "user_with_roles")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DISCRIMINATOR_TYPE")
